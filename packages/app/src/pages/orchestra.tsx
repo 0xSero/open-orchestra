@@ -1,9 +1,8 @@
 import { createSignal, createResource, For, Show, createMemo, onMount, onCleanup } from "solid-js"
 import { Button } from "@opencode-ai/ui/button"
 import { Icon } from "@opencode-ai/ui/icon"
-import { Card } from "@opencode-ai/ui/card"
 import { useGlobalSDK } from "@/context/global-sdk"
-import { useServer } from "@/context/server"
+import { useLayout } from "@/context/layout"
 // Types for Orchestra data - mirroring packages/plugin/src/types.ts
 type WorkerRuntime = "subagent" | "agent" | "server"
 type WorkerStatus = "available" | "busy" | "off" | "error"
@@ -91,98 +90,98 @@ type TabId = "workers" | "workflows" | "servers"
 export default function OrchestraPage() {
   const [activeTab, setActiveTab] = createSignal<TabId>("workers")
   const [refreshKey, setRefreshKey] = createSignal(0)
-  const server = useServer()
+  const globalSDK = useGlobalSDK()
+  const layout = useLayout()
 
-  // Mock data for demonstration - will be replaced with actual API calls
-  const mockWorkers: Worker[] = [
-    { id: "reader", name: "Reader", description: "Reads and analyzes code", runtime: "subagent", model: "claude-sonnet" },
-    { id: "coder", name: "Coder", description: "Implements features", runtime: "subagent", model: "claude-sonnet" },
-    { id: "reviewer", name: "Reviewer", description: "Reviews code changes", runtime: "subagent", model: "claude-sonnet" },
-    { id: "docs", name: "Docs", description: "Documentation agent", runtime: "agent", model: "claude-haiku" },
-    { id: "memory", name: "Memory", description: "Context tracking", runtime: "agent", model: "claude-haiku" },
-  ]
+  // Helper to read JSON files from the server using the SDK
+  async function readJsonFile<T>(directory: string, path: string, fallback: T): Promise<T> {
+    try {
+      // Try to read using the SDK file API
+      const response = await globalSDK.client.file.read({ directory, path })
+      if (response.data && response.data.content) {
+        return JSON.parse(response.data.content) as T
+      }
+      return fallback
+    } catch {
+      return fallback
+    }
+  }
 
-  const mockInstances: WorkerInstance[] = [
-    { instanceId: "inst-001", workerId: "reader", runtime: "subagent", status: "available", createdAt: new Date().toISOString(), lastSeenAt: new Date().toISOString() },
-    { instanceId: "inst-002", workerId: "coder", runtime: "subagent", status: "busy", sessionId: "sess-abc", createdAt: new Date().toISOString(), lastSeenAt: new Date().toISOString() },
-  ]
+  // Helper to list workflow files from directory
+  async function listWorkflowFiles(directory: string): Promise<Workflow[]> {
+    try {
+      const response = await globalSDK.client.file.list({ directory, path: ".opencode/workforce/workflows" })
+      if (response.data) {
+        const files = response.data as Array<{ name: string; type: string }>
+        const workflows: Workflow[] = []
+        for (const file of files) {
+          if (file.name.endsWith(".json")) {
+            const workflow = await readJsonFile<Workflow | null>(
+              directory,
+              `.opencode/workforce/workflows/${file.name}`,
+              null
+            )
+            if (workflow) workflows.push(workflow)
+          }
+        }
+        return workflows
+      }
+      return []
+    } catch {
+      return []
+    }
+  }
 
-  const mockWorkflows: Workflow[] = [
-    {
-      id: "workpack",
-      name: "Workpack",
-      description: "Standard feature development workflow",
-      iterations: { max: 3, mode: "until_verified" },
-      steps: [
-        { step: 1, name: "Understand", worker: "reader", prompt: "Analyze the codebase" },
-        { step: 2, name: "Implement", worker: "coder", prompt: "Implement the feature" },
-        { step: 3, name: "Review", worker: "reviewer", prompt: "Review the changes" },
-      ],
-    },
-    {
-      id: "boomerang",
-      name: "Boomerang",
-      description: "Async task delegation workflow",
-      iterations: { max: 1, mode: "fixed" },
-      steps: [
-        { step: 1, name: "Delegate", worker: "coder", prompt: "Execute the task" },
-      ],
-    },
-  ]
-
-  const mockIntegrations: Integration[] = [
-    { id: "context7", name: "Context7", description: "Documentation context provider", process: { command: "npx -y @context7/mcp", type: "mcp" } },
-    { id: "memory-graph", name: "Memory Graph", description: "Knowledge graph storage", process: { command: "npx -y memory-graph-mcp", type: "mcp" } },
-  ]
-
-  const mockIntegrationInstances: IntegrationInstance[] = [
-    { integrationId: "context7", status: "ready", pid: 12345, startedAt: new Date().toISOString() },
-  ]
-
-  // Fetch orchestra data
+  // Fetch orchestra data from all projects' plugin files
   const [data, { refetch }] = createResource(
     () => refreshKey(),
     async () => {
-      try {
-        // Try to fetch from server API first
-        const workersResponse = await fetch(`${server.url}/api/workforce/workers`)
-        const workflowsResponse = await fetch(`${server.url}/api/workforce/workflows`)
-        const integrationsResponse = await fetch(`${server.url}/api/workforce/integrations`)
+      const projects = layout.projects.list()
+      const allWorkers: Worker[] = []
+      const allWorkflows: Workflow[] = []
+      const allIntegrations: Integration[] = []
 
-        if (workersResponse.ok && workflowsResponse.ok && integrationsResponse.ok) {
-          const workers = await workersResponse.json()
-          const workflows = await workflowsResponse.json()
-          const integrations = await integrationsResponse.json()
+      // Read data from each project
+      for (const project of projects) {
+        const directory = project.worktree
 
-          return {
-            workers: workers.workers || [],
-            instances: workers.instances || [],
-            workflows: workflows.workflows || [],
-            integrations: integrations.definitions || [],
-            integrationInstances: integrations.instances || [],
-          } as OrchestraData
+        try {
+          // Read workers from .opencode/workforce/workers.json
+          const workersData = await readJsonFile<{ workers: Worker[] }>(
+            directory,
+            ".opencode/workforce/workers.json",
+            { workers: [] }
+          )
+          allWorkers.push(...(workersData.workers || []))
+
+          // Read workflows from .opencode/workforce/workflows/*.json
+          const workflows = await listWorkflowFiles(directory)
+          allWorkflows.push(...workflows)
+
+          // Read integrations from .opencode/workforce/integrations.json
+          const integrationsData = await readJsonFile<{ integrations: Integration[] }>(
+            directory,
+            ".opencode/workforce/integrations.json",
+            { integrations: [] }
+          )
+          allIntegrations.push(...(integrationsData.integrations || []))
+        } catch (err) {
+          console.log(`Failed to load orchestra data from ${directory}:`, err)
         }
-
-        // Fall back to mock data if API is not available
-        console.log("API not available, using mock data")
-        return {
-          workers: mockWorkers,
-          instances: mockInstances,
-          workflows: mockWorkflows,
-          integrations: mockIntegrations,
-          integrationInstances: mockIntegrationInstances,
-        } as OrchestraData
-      } catch (err) {
-        console.log("API error, using mock data:", err)
-        // Return mock data on error
-        return {
-          workers: mockWorkers,
-          instances: mockInstances,
-          workflows: mockWorkflows,
-          integrations: mockIntegrations,
-          integrationInstances: mockIntegrationInstances,
-        } as OrchestraData
       }
+
+      // Deduplicate by ID
+      const uniqueWorkers = [...new Map(allWorkers.map(w => [w.id, w])).values()]
+      const uniqueWorkflows = [...new Map(allWorkflows.map(w => [w.id, w])).values()]
+      const uniqueIntegrations = [...new Map(allIntegrations.map(i => [i.id, i])).values()]
+
+      return {
+        workers: uniqueWorkers,
+        instances: [], // Runtime instances not persisted to file
+        workflows: uniqueWorkflows,
+        integrations: uniqueIntegrations,
+        integrationInstances: [], // Runtime instances not persisted to file
+      } as OrchestraData
     }
   )
 
@@ -562,19 +561,13 @@ function EmptyState(props: { message: string }) {
 // Edit Modal Components
 function WorkerEditModal(props: { worker: Worker; onClose: () => void; onSave: () => void }) {
   const [formData, setFormData] = createSignal({ ...props.worker })
-  const server = useServer()
 
   const handleSave = async () => {
-    try {
-      await fetch(`${server.url}/api/workforce/workers`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData()),
-      })
-      props.onSave()
-    } catch (err) {
-      console.error("Failed to save worker:", err)
-    }
+    // TODO: Implement file-based saving via SDK
+    // For now, just log and close
+    console.log("Worker data to save:", formData())
+    alert("Saving workers is not yet implemented. Edit the .opencode/workforce/workers.json file directly.")
+    props.onClose()
   }
 
   return (
@@ -641,19 +634,13 @@ function WorkerEditModal(props: { worker: Worker; onClose: () => void; onSave: (
 
 function WorkflowEditModal(props: { workflow: Workflow; onClose: () => void; onSave: () => void }) {
   const [formData, setFormData] = createSignal({ ...props.workflow })
-  const server = useServer()
 
   const handleSave = async () => {
-    try {
-      await fetch(`${server.url}/api/workforce/workflows`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData()),
-      })
-      props.onSave()
-    } catch (err) {
-      console.error("Failed to save workflow:", err)
-    }
+    // TODO: Implement file-based saving via SDK
+    // For now, just log and close
+    console.log("Workflow data to save:", formData())
+    alert("Saving workflows is not yet implemented. Edit the .opencode/workforce/workflows/*.json files directly.")
+    props.onClose()
   }
 
   return (
@@ -727,19 +714,13 @@ function WorkflowEditModal(props: { workflow: Workflow; onClose: () => void; onS
 
 function IntegrationEditModal(props: { integration: Integration; onClose: () => void; onSave: () => void }) {
   const [formData, setFormData] = createSignal({ ...props.integration })
-  const server = useServer()
 
   const handleSave = async () => {
-    try {
-      await fetch(`${server.url}/api/workforce/integrations`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData()),
-      })
-      props.onSave()
-    } catch (err) {
-      console.error("Failed to save integration:", err)
-    }
+    // TODO: Implement file-based saving via SDK
+    // For now, just log and close
+    console.log("Integration data to save:", formData())
+    alert("Saving integrations is not yet implemented. Edit the .opencode/workforce/integrations.json file directly.")
+    props.onClose()
   }
 
   return (
