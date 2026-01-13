@@ -1,19 +1,72 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "orchestra",
   "version": "0.1.0",
+  "private": true,
   "type": "module",
-  "main": "src/index.ts",
+  "packageManager": "bun@1.3.5",
   "scripts": {
     "test": "bun test",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dev:desktop": "bun run --cwd packages/apps/desktop dev",
+    "dev:app": "bun run --cwd packages/app dev",
+    "dev:web": "bun run --cwd packages/apps/web dev"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/apps/*"
+    ],
+    "catalog": {
+      "@types/bun": "1.3.4",
+      "@kobalte/core": "0.13.11",
+      "@types/luxon": "3.7.1",
+      "@types/node": "22.13.9",
+      "@tsconfig/node22": "22.0.2",
+      "@tsconfig/bun": "1.0.9",
+      "@pierre/diffs": "1.0.2",
+      "@solid-primitives/storage": "4.3.3",
+      "@tailwindcss/vite": "4.1.11",
+      "diff": "8.0.2",
+      "dompurify": "3.3.1",
+      "ai": "5.0.119",
+      "fuzzysort": "3.1.0",
+      "luxon": "3.6.1",
+      "marked": "17.0.1",
+      "marked-shiki": "1.2.1",
+      "typescript": "5.8.2",
+      "@typescript/native-preview": "7.0.0-dev.20251207.1",
+      "zod": "4.1.8",
+      "remeda": "2.26.0",
+      "shiki": "3.20.0",
+      "solid-list": "0.3.0",
+      "tailwindcss": "4.1.11",
+      "virtua": "0.42.3",
+      "vite": "7.1.4",
+      "@solidjs/meta": "0.29.4",
+      "@solidjs/router": "0.15.4",
+      "solid-js": "1.9.10",
+      "vite-plugin-solid": "2.11.10"
+    }
   },
   "dependencies": {
-    "@opencode-ai/plugin": "latest",
-    "@opencode-ai/sdk": "latest",
+    "@opencode-ai/plugin": "workspace:*",
+    "@opencode-ai/sdk": "workspace:*",
     "zod": "^3.24.0"
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "typescript": "^5.7.0"
+    "@types/bun": "catalog:",
+    "typescript": "catalog:"
+  },
+  "trustedDependencies": [
+    "esbuild",
+    "protobufjs"
+  ],
+  "overrides": {
+    "@types/bun": "catalog:",
+    "@types/node": "catalog:"
+  },
+  "patchedDependencies": {
+    "ghostty-web@0.3.0": "patches/ghostty-web@0.3.0.patch"
   }
 }

@@ -9,9 +9,9 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "outDir": "dist",
-    "rootDir": "src",
+    "rootDir": "packages/plugin/src",
     "types": ["bun-types"]
   },
-  "include": ["src/**/*"],
+  "include": ["packages/plugin/src/**/*"],
   "exclude": ["node_modules", "dist", "test"]
 }
