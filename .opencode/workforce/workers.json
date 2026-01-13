@@ -1,0 +1,45 @@
+{
+  "workers": [
+    {
+      "id": "reader",
+      "name": "Repo Reader",
+      "description": "Reads codebase and produces structured summaries",
+      "runtime": "subagent",
+      "model": "zhipuai-coding-plan/glm-4.7"
+    },
+    {
+      "id": "coder",
+      "name": "Coder",
+      "description": "Implements features by writing and editing code",
+      "runtime": "subagent",
+      "model": "zhipuai-coding-plan/glm-4.7"
+    },
+    {
+      "id": "reviewer",
+      "name": "Reviewer",
+      "description": "Reviews changes for correctness and security",
+      "runtime": "subagent",
+      "model": "openai/gpt-5.2"
+    },
+    {
+      "id": "docs",
+      "name": "Documentation Agent",
+      "description": "Deeply ingests and understands documentation, answers questions about APIs and libraries",
+      "runtime": "agent",
+      "model": "zhipuai-coding-plan/glm-4.7",
+      "integrations": [
+        { "integrationId": "context7" }
+      ]
+    },
+    {
+      "id": "memory",
+      "name": "Memory Agent",
+      "description": "Tracks context, decisions, and progress. Reminds agents of what has been done and why",
+      "runtime": "agent",
+      "model": "zhipuai-coding-plan/glm-4.7",
+      "integrations": [
+        { "integrationId": "neo4j" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "integrations": [
+    {
+      "id": "context7",
+      "name": "Context7 MCP",
+      "description": "Documentation search via Context7 API",
+      "process": {
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp@latest"],
+        "type": "mcp"
+      },
+      "tools": ["mcp__context7__resolve-library-id", "mcp__context7__query-docs"],
+      "instructions": "## Context7 Integration\n\nYou have access to Context7 for documentation queries.\n\n### Usage\n1. First resolve a library ID: `mcp__context7__resolve-library-id(libraryName: \"...\", query: \"...\")`\n2. Then query docs: `mcp__context7__query-docs(libraryId: \"...\", query: \"...\")`\n\nAlways resolve the library ID before querying documentation."
+    },
+    {
+      "id": "neo4j",
+      "name": "Neo4j Graph Database",
+      "description": "Local Neo4j instance for knowledge graph storage",
+      "process": {
+        "type": "http",
+        "port": 7474,
+        "healthCheck": "http://localhost:7474"
+      },
+      "instructions": "## Neo4j Knowledge Graph\n\nYou have access to a local Neo4j graph database for storing and querying knowledge.\n\n### Connection\n- Bolt URL: `bolt://localhost:7687`\n- HTTP URL: `http://localhost:7474`\n- Default credentials: neo4j/password (change in production)\n\n### Usage Patterns\n\n**Store an entity:**\n```cypher\nCREATE (n:Entity {name: $name, type: $type, content: $content, createdAt: datetime()})\nRETURN n\n```\n\n**Create a relationship:**\n```cypher\nMATCH (a:Entity {name: $from}), (b:Entity {name: $to})\nCREATE (a)-[r:RELATES_TO {type: $relationType}]->(b)\nRETURN r\n```\n\n**Query related entities:**\n```cypher\nMATCH (n:Entity {name: $name})-[r]-(related)\nRETURN n, r, related\n```\n\n**Search by content:**\n```cypher\nMATCH (n:Entity)\nWHERE n.content CONTAINS $searchTerm\nRETURN n\n```\n\n### Best Practices\n- Use meaningful node labels: `Decision`, `Requirement`, `Implementation`, `Context`\n- Add timestamps to track when knowledge was added\n- Use relationship types to capture semantic meaning: `IMPLEMENTS`, `DEPENDS_ON`, `DECIDED_BY`"
+    }
+  ]
+}
