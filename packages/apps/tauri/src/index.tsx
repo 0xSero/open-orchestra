@@ -1,9 +1,10 @@
 // @refresh reload
 import { render } from "solid-js/web"
+import { createSignal, onMount, Show } from "solid-js"
 import { AppBaseProviders, AppInterface, PlatformProvider, Platform } from "@opencode-ai/app"
-import { open, save } from "@tauri-apps/plugin-dialog"
-import { open as shellOpen } from "@tauri-apps/plugin-shell"
-import { type as ostype } from "@tauri-apps/plugin-os"
+
+// Check if we're running inside Tauri
+const isTauri = () => typeof window !== "undefined" && "__TAURI_INTERNALS__" in window
 
 const root = document.getElementById("root")
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
@@ -18,10 +19,13 @@ const getServerUrl = () => {
   return `http://localhost:${port}`
 }
 
-const platform: Platform = {
-  platform: "desktop",
+// Create platform with fallbacks for browser mode
+const createPlatform = (): Platform => ({
+  platform: isTauri() ? "desktop" : "web",
 
   async openDirectoryPickerDialog(opts) {
+    if (!isTauri()) return null
+    const { open } = await import("@tauri-apps/plugin-dialog")
     const result = await open({
       directory: true,
       multiple: opts?.multiple ?? false,
@@ -31,6 +35,8 @@ const platform: Platform = {
   },
 
   async openFilePickerDialog(opts) {
+    if (!isTauri()) return null
+    const { open } = await import("@tauri-apps/plugin-dialog")
     const result = await open({
       directory: false,
       multiple: opts?.multiple ?? false,
@@ -40,6 +46,8 @@ const platform: Platform = {
   },
 
   async saveFilePickerDialog(opts) {
+    if (!isTauri()) return null
+    const { save } = await import("@tauri-apps/plugin-dialog")
     const result = await save({
       title: opts?.title ?? "Save file",
       defaultPath: opts?.defaultPath,
@@ -48,9 +56,15 @@ const platform: Platform = {
   },
 
   openLink(url: string) {
-    void shellOpen(url).catch(() => undefined)
+    if (isTauri()) {
+      import("@tauri-apps/plugin-shell").then(({ open }) => {
+        void open(url).catch(() => undefined)
+      })
+    } else {
+      window.open(url, "_blank")
+    }
   },
-}
+})
 
 // Stops mousewheel events from reaching Tauri's pinch-to-zoom handler
 root?.addEventListener("mousewheel", (e) => {
@@ -58,12 +72,26 @@ root?.addEventListener("mousewheel", (e) => {
 })
 
 render(() => {
+  const [isMacOS, setIsMacOS] = createSignal(false)
+  const platform = createPlatform()
+
+  onMount(async () => {
+    if (isTauri()) {
+      try {
+        const { type: ostype } = await import("@tauri-apps/plugin-os")
+        setIsMacOS(ostype() === "macos")
+      } catch {
+        // Not in Tauri environment
+      }
+    }
+  })
+
   return (
     <PlatformProvider value={platform}>
       <AppBaseProviders>
-        {ostype() === "macos" && (
+        <Show when={isMacOS()}>
           <div class="mx-px bg-background-base border-b border-border-weak-base h-8" data-tauri-drag-region />
-        )}
+        </Show>
         <AppInterface defaultUrl={getServerUrl()} />
       </AppBaseProviders>
     </PlatformProvider>
