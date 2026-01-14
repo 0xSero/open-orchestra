@@ -93,9 +93,10 @@ export function SessionWorkersTab(props: SessionWorkersTabProps) {
     return "off"
   }
 
-  // Count active workers
+  // Count active workers (used elsewhere, kept for compatibility)
   const activeWorkerCount = createMemo(() => {
-    const workers = workerTemplates() ?? []
+    const workers = workerTemplates()
+    if (!workers) return 0
     return workers.filter(w => getWorkerStatus(w) === "busy").length
   })
 
@@ -141,8 +142,13 @@ export function SessionWorkersTab(props: SessionWorkersTabProps) {
   const stats = createMemo(() => {
     const workers = workerTemplates() ?? []
     const children = childSessions()
-    const active = activeWorkerCount()
     const statusType = currentStatus().type
+
+    // Count active workers safely
+    let active = 0
+    for (const w of workers) {
+      if (getWorkerStatus(w) === "busy") active++
+    }
 
     return [
       { label: "Worker Templates", value: workers.length.toString() },
