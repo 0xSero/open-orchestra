@@ -1,0 +1,22 @@
+{
+  "id": "workpack",
+  "name": "Workpack Development Flow",
+  "description": "Read repo, create work artifacts, implement, review",
+  "iterations": { "max": 2, "mode": "until_verified" },
+  "steps": [
+    {
+      "step": 0,
+      "name": "Read Repository",
+      "worker": "reader",
+      "prompt": "Read the repository structure and provide a summary of the key files and modules.",
+      "verification": "contains:SUMMARY"
+    },
+    {
+      "step": 1,
+      "name": "Implementation",
+      "worker": "builder",
+      "prompt": "Based on the task, implement the required changes.",
+      "verification": "delegate:reviewer"
+    }
+  ]
+}

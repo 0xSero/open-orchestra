@@ -12,7 +12,7 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@opencode-ai/desktop": "workspace:*",
+    "@opencode-ai/app": "workspace:*",
     "@tauri-apps/api": "^2",
     "@tauri-apps/plugin-dialog": "~2",
     "@tauri-apps/plugin-opener": "^2",
@@ -26,10 +26,12 @@
   },
   "devDependencies": {
     "@actions/artifact": "4.0.0",
+    "@tailwindcss/vite": "catalog:",
     "@tauri-apps/cli": "^2",
     "@types/bun": "catalog:",
     "@typescript/native-preview": "catalog:",
     "typescript": "~5.6.2",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "vite-plugin-solid": "catalog:"
   }
 }

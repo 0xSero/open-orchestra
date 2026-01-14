@@ -1,8 +1,6 @@
 // @refresh reload
 import { render } from "solid-js/web"
-import { App, PlatformProvider, Platform } from "@opencode-ai/desktop"
-import { runUpdater } from "./updater"
-import { onMount } from "solid-js"
+import { AppBaseProviders, AppInterface, PlatformProvider, Platform } from "@opencode-ai/app"
 import { open, save } from "@tauri-apps/plugin-dialog"
 import { open as shellOpen } from "@tauri-apps/plugin-shell"
 import { type as ostype } from "@tauri-apps/plugin-os"
@@ -14,8 +12,14 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   )
 }
 
+// Get port from Rust's initialization script or env
+const getServerUrl = () => {
+  const port = window.__OPENCODE__?.port ?? 4096
+  return `http://localhost:${port}`
+}
+
 const platform: Platform = {
-  platform: "tauri",
+  platform: "desktop",
 
   async openDirectoryPickerDialog(opts) {
     const result = await open({
@@ -44,21 +48,24 @@ const platform: Platform = {
   },
 
   openLink(url: string) {
-    shellOpen(url)
+    void shellOpen(url).catch(() => undefined)
   },
 }
 
-render(() => {
-  onMount(() => {
-    if (window.__OPENCODE__?.updaterEnabled) runUpdater()
-  })
+// Stops mousewheel events from reaching Tauri's pinch-to-zoom handler
+root?.addEventListener("mousewheel", (e) => {
+  e.stopPropagation()
+})
 
+render(() => {
   return (
     <PlatformProvider value={platform}>
-      {ostype() === "macos" && (
-        <div class="bg-background-base border-b border-border-weak-base h-8" data-tauri-drag-region />
-      )}
-      <App />
+      <AppBaseProviders>
+        {ostype() === "macos" && (
+          <div class="mx-px bg-background-base border-b border-border-weak-base h-8" data-tauri-drag-region />
+        )}
+        <AppInterface defaultUrl={getServerUrl()} />
+      </AppBaseProviders>
     </PlatformProvider>
   )
 }, root!)

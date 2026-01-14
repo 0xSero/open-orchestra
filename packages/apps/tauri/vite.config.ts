@@ -1,11 +1,32 @@
 import { defineConfig } from "vite"
-import desktopPlugin from "@opencode-ai/desktop/vite"
+import solidPlugin from "vite-plugin-solid"
+import tailwindcss from "@tailwindcss/vite"
+import { fileURLToPath } from "url"
 
 const host = process.env.TAURI_DEV_HOST
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [desktopPlugin],
+  plugins: [
+    {
+      name: "opencode-tauri:config",
+      config() {
+        return {
+          resolve: {
+            alias: {
+              // Point @ to the app package's src folder
+              "@": fileURLToPath(new URL("../../app/src", import.meta.url)),
+            },
+          },
+          worker: {
+            format: "es",
+          },
+        }
+      },
+    },
+    tailwindcss(),
+    solidPlugin(),
+  ],
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
   // 1. prevent Vite from obscuring rust errors
