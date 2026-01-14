@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "dev:desktop": "bun run --cwd packages/apps/desktop dev",
     "dev:app": "bun run --cwd packages/app dev",
-    "dev:web": "bun run --cwd packages/apps/web dev"
+    "dev:web": "bun run --cwd packages/apps/web dev",
+    "orchestra:dev": "./scripts/start-orchestra-dev.sh",
+    "orchestra:stop": "pkill -f 'vite.*packages' || true"
   },
   "workspaces": {
     "packages": [
