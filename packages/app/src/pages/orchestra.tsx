@@ -132,7 +132,44 @@ export default function OrchestraPage() {
     }
   }
 
-  // Fetch orchestra data from all projects' plugin files
+  // Helper to load orchestra data from a directory
+  async function loadOrchestraDataFromDirectory(directory: string): Promise<{
+    workers: Worker[]
+    workflows: Workflow[]
+    integrations: Integration[]
+  }> {
+    const workers: Worker[] = []
+    const workflows: Workflow[] = []
+    const integrations: Integration[] = []
+
+    try {
+      // Read workers from .opencode/workforce/workers.json
+      const workersData = await readJsonFile<{ workers: Worker[] }>(
+        directory,
+        ".opencode/workforce/workers.json",
+        { workers: [] }
+      )
+      workers.push(...(workersData.workers || []))
+
+      // Read workflows from .opencode/workforce/workflows/*.json
+      const workflowFiles = await listWorkflowFiles(directory)
+      workflows.push(...workflowFiles)
+
+      // Read integrations from .opencode/workforce/integrations.json
+      const integrationsData = await readJsonFile<{ integrations: Integration[] }>(
+        directory,
+        ".opencode/workforce/integrations.json",
+        { integrations: [] }
+      )
+      integrations.push(...(integrationsData.integrations || []))
+    } catch (err) {
+      console.log(`Failed to load orchestra data from ${directory || "server root"}:`, err)
+    }
+
+    return { workers, workflows, integrations }
+  }
+
+  // Fetch orchestra data from all projects' plugin files, with server root fallback
   const [data, { refetch }] = createResource(
     () => refreshKey(),
     async () => {
@@ -141,32 +178,19 @@ export default function OrchestraPage() {
       const allWorkflows: Workflow[] = []
       const allIntegrations: Integration[] = []
 
-      // Read data from each project
-      for (const project of projects) {
-        const directory = project.worktree
-
-        try {
-          // Read workers from .opencode/workforce/workers.json
-          const workersData = await readJsonFile<{ workers: Worker[] }>(
-            directory,
-            ".opencode/workforce/workers.json",
-            { workers: [] }
-          )
-          allWorkers.push(...(workersData.workers || []))
-
-          // Read workflows from .opencode/workforce/workflows/*.json
-          const workflows = await listWorkflowFiles(directory)
-          allWorkflows.push(...workflows)
-
-          // Read integrations from .opencode/workforce/integrations.json
-          const integrationsData = await readJsonFile<{ integrations: Integration[] }>(
-            directory,
-            ".opencode/workforce/integrations.json",
-            { integrations: [] }
-          )
-          allIntegrations.push(...(integrationsData.integrations || []))
-        } catch (err) {
-          console.log(`Failed to load orchestra data from ${directory}:`, err)
+      // If no projects are open, try reading from server's working directory
+      if (projects.length === 0) {
+        const serverData = await loadOrchestraDataFromDirectory("")
+        allWorkers.push(...serverData.workers)
+        allWorkflows.push(...serverData.workflows)
+        allIntegrations.push(...serverData.integrations)
+      } else {
+        // Read data from each open project
+        for (const project of projects) {
+          const projectData = await loadOrchestraDataFromDirectory(project.worktree)
+          allWorkers.push(...projectData.workers)
+          allWorkflows.push(...projectData.workflows)
+          allIntegrations.push(...projectData.integrations)
         }
       }
 
