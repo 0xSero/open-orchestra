@@ -45,6 +45,7 @@ import { showToast } from "@opencode-ai/ui/toast"
 import {
   SessionHeader,
   SessionContextTab,
+  SessionWorkersTab,
   SortableTab,
   FileVisual,
   SortableTerminalTab,
@@ -721,17 +722,25 @@ export default function Page() {
   }
 
   const contextOpen = createMemo(() => tabs().active() === "context" || tabs().all().includes("context"))
+  const workersOpen = createMemo(() => tabs().active() === "workers" || tabs().all().includes("workers"))
+  const childSessions = createMemo(() => {
+    const id = params.id
+    if (!id) return []
+    return sync.data.session.filter(s => s.parentID === id)
+  })
+  const hasChildSessions = createMemo(() => childSessions().length > 0)
   const openedTabs = createMemo(() =>
     tabs()
       .all()
-      .filter((tab) => tab !== "context"),
+      .filter((tab) => tab !== "context" && tab !== "workers"),
   )
 
   const reviewTab = createMemo(() => hasReview() || tabs().active() === "review")
+  const workersTab = createMemo(() => hasChildSessions() || tabs().active() === "workers")
   const mobileReview = createMemo(() => !isDesktop() && hasReview() && store.mobileTab === "review")
 
   const showTabs = createMemo(
-    () => view().reviewPanel.opened() && (hasReview() || tabs().all().length > 0 || contextOpen()),
+    () => view().reviewPanel.opened() && (hasReview() || tabs().all().length > 0 || contextOpen() || workersOpen()),
   )
 
   const activeTab = createMemo(() => {
@@ -741,6 +750,7 @@ export default function Page() {
 
     const first = openedTabs()[0]
     if (first) return first
+    if (workersOpen()) return "workers"
     if (contextOpen()) return "context"
     return "review"
   })
@@ -1311,6 +1321,28 @@ export default function Page() {
                         </div>
                       </Tabs.Trigger>
                     </Show>
+                    <Show when={workersTab()}>
+                      <Tabs.Trigger
+                        value="workers"
+                        closeButton={
+                          <Tooltip value="Close tab" placement="bottom">
+                            <IconButton icon="close" variant="ghost" onClick={() => tabs().close("workers")} />
+                          </Tooltip>
+                        }
+                        hideCloseButton
+                        onMiddleClick={() => tabs().close("workers")}
+                      >
+                        <div class="flex items-center gap-2">
+                          <Icon name="task" size="small" />
+                          <div>Workers</div>
+                          <Show when={childSessions().length > 0}>
+                            <div class="text-12-medium text-text-strong h-4 px-2 flex flex-col items-center justify-center rounded-full bg-surface-base">
+                              {childSessions().length}
+                            </div>
+                          </Show>
+                        </div>
+                      </Tabs.Trigger>
+                    </Show>
                     <SortableProvider ids={openedTabs()}>
                       <For each={openedTabs()}>{(tab) => <SortableTab tab={tab} onTabClose={tabs().close} />}</For>
                     </SortableProvider>
@@ -1363,6 +1395,18 @@ export default function Page() {
                           visibleUserMessages={visibleUserMessages}
                           view={view}
                           info={info}
+                        />
+                      </div>
+                    </Show>
+                  </Tabs.Content>
+                </Show>
+                <Show when={workersTab()}>
+                  <Tabs.Content value="workers" class="flex flex-col h-full overflow-hidden contain-strict">
+                    <Show when={activeTab() === "workers"}>
+                      <div class="relative pt-2 flex-1 min-h-0 overflow-hidden">
+                        <SessionWorkersTab
+                          sessionID={params.id!}
+                          view={view}
                         />
                       </div>
                     </Show>
