@@ -1,6 +1,26 @@
 {
   "integrations": [
     {
+      "id": "linear",
+      "name": "Linear Issue Tracker",
+      "description": "Linear integration for issue tracking and project management",
+      "process": {
+        "type": "env",
+        "envVar": "LINEAR_API_KEY"
+      },
+      "tools": [
+        "linear_sync",
+        "linear_teams",
+        "linear_issues",
+        "linear_issue_create",
+        "linear_issue_update",
+        "linear_issue_move",
+        "linear_projects",
+        "linear_states"
+      ],
+      "instructions": "## Linear Integration\n\nYou have access to Linear for issue tracking and project management.\n\n### Syncing Data\nUse `linear_sync` to fetch all Linear data (teams, issues, states, projects).\n\n### Viewing Data\n- `linear_teams` - List available teams\n- `linear_issues` - List issues (filter by team, project, state)\n- `linear_states` - List workflow states (Kanban columns)\n- `linear_projects` - List projects\n\n### Managing Issues\n- `linear_issue_create` - Create new issues\n- `linear_issue_update` - Update issue details\n- `linear_issue_move` - Change issue state (Kanban moves)"
+    },
+    {
       "id": "context7",
       "name": "Context7 MCP",
       "description": "Documentation search via Context7 API",
@@ -21,7 +41,7 @@
         "port": 7474,
         "healthCheck": "http://localhost:7474"
       },
-      "instructions": "## Neo4j Knowledge Graph\n\nYou have access to a local Neo4j graph database for storing and querying knowledge.\n\n### Connection\n- Bolt URL: `bolt://localhost:7687`\n- HTTP URL: `http://localhost:7474`\n- Default credentials: neo4j/password (change in production)\n\n### Usage Patterns\n\n**Store an entity:**\n```cypher\nCREATE (n:Entity {name: $name, type: $type, content: $content, createdAt: datetime()})\nRETURN n\n```\n\n**Create a relationship:**\n```cypher\nMATCH (a:Entity {name: $from}), (b:Entity {name: $to})\nCREATE (a)-[r:RELATES_TO {type: $relationType}]->(b)\nRETURN r\n```\n\n**Query related entities:**\n```cypher\nMATCH (n:Entity {name: $name})-[r]-(related)\nRETURN n, r, related\n```\n\n**Search by content:**\n```cypher\nMATCH (n:Entity)\nWHERE n.content CONTAINS $searchTerm\nRETURN n\n```\n\n### Best Practices\n- Use meaningful node labels: `Decision`, `Requirement`, `Implementation`, `Context`\n- Add timestamps to track when knowledge was added\n- Use relationship types to capture semantic meaning: `IMPLEMENTS`, `DEPENDS_ON`, `DECIDED_BY`"
+      "instructions": "## Neo4j Knowledge Graph\n\nYou have access to a local Neo4j graph database for storing and querying knowledge.\n\n### Connection\n- Bolt URL: `bolt://localhost:7687`\n- HTTP URL: `http://localhost:7474`\n- Authentication: Disabled (local development)\n\nTo run Cypher queries, use the command: `cypher-shell -a bolt://localhost:7687 -f /path/to/query.cyp`\n\n### Usage Patterns\n\n**Store an entity:**\n```cypher\nCREATE (n:Entity {name: $name, type: $type, content: $content, createdAt: datetime()})\nRETURN n\n```\n\n**Create a relationship:**\n```cypher\nMATCH (a:Entity {name: $from}), (b:Entity {name: $to})\nCREATE (a)-[r:RELATES_TO {type: $relationType}]->(b)\nRETURN r\n```\n\n**Query related entities:**\n```cypher\nMATCH (n:Entity {name: $name})-[r]-(related)\nRETURN n, r, related\n```\n\n**Search by content:**\n```cypher\nMATCH (n:Entity)\nWHERE n.content CONTAINS $searchTerm\nRETURN n\n```\n\n### Best Practices\n- Use meaningful node labels: `Decision`, `Requirement`, `Implementation`, `Context`\n- Add timestamps to track when knowledge was added\n- Use relationship types to capture semantic meaning: `IMPLEMENTS`, `DEPENDS_ON`, `DECIDED_BY`"
     }
   ]
 }

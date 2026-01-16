@@ -1,0 +1,1315 @@
+{
+  "apiConfigured": true,
+  "teams": [
+    {
+      "id": "98061049-bb17-4897-8172-a451e725f92f",
+      "key": "HOM",
+      "name": "Homelab"
+    }
+  ],
+  "states": [
+    {
+      "id": "f34e80c0-f9ce-4c19-bc3f-8c4f14b0ee73",
+      "name": "Done",
+      "type": "completed",
+      "color": "#5e6ad2",
+      "position": 3,
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "d23b94b5-c8e5-4719-8f4c-efa43f728d33",
+      "name": "Duplicate",
+      "type": "canceled",
+      "color": "#95a2b3",
+      "position": 5,
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "cf669bac-cb58-4b2d-80a9-336722f8d93e",
+      "name": "In Progress",
+      "type": "started",
+      "color": "#f2c94c",
+      "position": 2,
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "name": "Backlog",
+      "type": "backlog",
+      "color": "#bec2c8",
+      "position": 0,
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "508f3457-3f2e-45a8-9688-60fac3154d55",
+      "name": "Canceled",
+      "type": "canceled",
+      "color": "#95a2b3",
+      "position": 4,
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "name": "Todo",
+      "type": "unstarted",
+      "color": "#e2e2e2",
+      "position": 1,
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    }
+  ],
+  "projects": [
+    {
+      "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "name": "clawdis",
+      "state": "backlog",
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "9b620df6-1456-4056-bc15-626f77093769",
+      "name": "azul",
+      "state": "backlog",
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "name": "lmvllm",
+      "state": "backlog",
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "name": "orchestra",
+      "state": "backlog",
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    }
+  ],
+  "labels": [
+    {
+      "id": "be7eccc4-8c90-491d-823f-d48b34521def",
+      "name": "Feature",
+      "color": "#BB87FC",
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "b4fe484a-5458-4cab-848e-fb62ef0e179c",
+      "name": "Bug",
+      "color": "#EB5757",
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    },
+    {
+      "id": "05567293-8640-4fbb-981c-9795b2a5c782",
+      "name": "Improvement",
+      "color": "#4EA7FC",
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f"
+    }
+  ],
+  "users": [
+    {
+      "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "name": "Sero Ch",
+      "email": "sherifcherfa@gmail.com",
+      "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+    }
+  ],
+  "issues": [
+    {
+      "id": "b2ae2773-2b06-4404-8d34-8c1a572cee15",
+      "identifier": "HOM-57",
+      "title": "Test issue from browser automation",
+      "description": null,
+      "priority": 0,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "project": null,
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-57/test-issue-from-browser-automation",
+      "createdAt": "2026-01-16T10:19:34.064Z",
+      "updatedAt": "2026-01-16T10:19:34.064Z"
+    },
+    {
+      "id": "a3fa3f90-5b45-48eb-9f6b-1b26ef9556e0",
+      "identifier": "HOM-56",
+      "title": "help 1",
+      "description": "help",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assigneeId": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "assignee": {
+        "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+        "name": "Sero Ch",
+        "email": "sherifcherfa@gmail.com",
+        "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+      },
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-56/help-1",
+      "createdAt": "2026-01-16T10:15:43.484Z",
+      "updatedAt": "2026-01-16T10:15:43.484Z"
+    },
+    {
+      "id": "fb72367c-25f0-4d6c-a756-1c700ca38fd7",
+      "identifier": "HOM-55",
+      "title": "Test issue from browser automation",
+      "description": null,
+      "priority": 0,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "project": null,
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-55/test-issue-from-browser-automation",
+      "createdAt": "2026-01-16T10:14:19.843Z",
+      "updatedAt": "2026-01-16T10:14:19.843Z"
+    },
+    {
+      "id": "e4560b81-e8b5-4a23-941c-d6ffe9d3fa99",
+      "identifier": "HOM-54",
+      "title": "Help",
+      "description": "help",
+      "priority": 2,
+      "stateId": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "state": {
+        "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+        "name": "Todo",
+        "type": "unstarted"
+      },
+      "assigneeId": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "assignee": {
+        "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+        "name": "Sero Ch",
+        "email": "sherifcherfa@gmail.com",
+        "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+      },
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-54/help",
+      "createdAt": "2026-01-16T10:08:59.107Z",
+      "updatedAt": "2026-01-16T10:08:59.107Z"
+    },
+    {
+      "id": "79facd01-4da7-452d-a1c6-703179ea0fd1",
+      "identifier": "HOM-53",
+      "title": "Test issue 1768557723997 (method 2)",
+      "description": "This is a test issue created by the test script",
+      "priority": 0,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "project": null,
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-53/test-issue-1768557723997-method-2",
+      "createdAt": "2026-01-16T10:02:04.584Z",
+      "updatedAt": "2026-01-16T10:02:04.584Z"
+    },
+    {
+      "id": "aed1c3a7-72dd-4c35-b074-6727d39c1572",
+      "identifier": "HOM-52",
+      "title": "Test issue 1768557723997",
+      "description": "This is a test issue created by the test script",
+      "priority": 0,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "project": null,
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-52/test-issue-1768557723997",
+      "createdAt": "2026-01-16T10:02:04.333Z",
+      "updatedAt": "2026-01-16T10:02:04.333Z"
+    },
+    {
+      "id": "cc62d88e-0bbc-42f5-9214-b3ef49f8fdbe",
+      "identifier": "HOM-51",
+      "title": "Ex",
+      "description": "Ex",
+      "priority": 2,
+      "stateId": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "state": {
+        "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+        "name": "Todo",
+        "type": "unstarted"
+      },
+      "assigneeId": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "assignee": {
+        "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+        "name": "Sero Ch",
+        "email": "sherifcherfa@gmail.com",
+        "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+      },
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-51/ex",
+      "createdAt": "2026-01-15T17:26:34.987Z",
+      "updatedAt": "2026-01-15T17:26:34.987Z"
+    },
+    {
+      "id": "3d1d33c7-5e54-4ee8-a6a5-aa53ad988b1c",
+      "identifier": "HOM-50",
+      "title": "Review repo",
+      "description": "review everything and update [agents.md](http://agents.md)",
+      "priority": 1,
+      "stateId": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "state": {
+        "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+        "name": "Todo",
+        "type": "unstarted"
+      },
+      "assigneeId": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "assignee": {
+        "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+        "name": "Sero Ch",
+        "email": "sherifcherfa@gmail.com",
+        "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+      },
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-50/review-repo",
+      "createdAt": "2026-01-15T15:49:10.444Z",
+      "updatedAt": "2026-01-15T15:49:10.444Z"
+    },
+    {
+      "id": "76abc3cf-02a7-4866-b184-804b5c60b927",
+      "identifier": "HOM-49",
+      "title": "Scour repo and document",
+      "description": "I want you to read the entire repo, it’s style, etc.. and then update [agents.md](http://agents.md) and point out ANY code smalls you see",
+      "priority": 2,
+      "stateId": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "state": {
+        "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+        "name": "Todo",
+        "type": "unstarted"
+      },
+      "assigneeId": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "assignee": {
+        "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+        "name": "Sero Ch",
+        "email": "sherifcherfa@gmail.com",
+        "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+      },
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-49/scour-repo-and-document",
+      "createdAt": "2026-01-15T15:43:06.679Z",
+      "updatedAt": "2026-01-15T15:43:06.679Z"
+    },
+    {
+      "id": "eec8ccaf-a54b-4eb8-be35-556d27453bf8",
+      "identifier": "HOM-48",
+      "title": "Review repo",
+      "description": "review and update [agents.md](http://agents.md)",
+      "priority": 1,
+      "stateId": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "state": {
+        "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+        "name": "Todo",
+        "type": "unstarted"
+      },
+      "assigneeId": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "assignee": {
+        "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+        "name": "Sero Ch",
+        "email": "sherifcherfa@gmail.com",
+        "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+      },
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-48/review-repo",
+      "createdAt": "2026-01-15T15:11:22.858Z",
+      "updatedAt": "2026-01-15T15:11:22.858Z"
+    },
+    {
+      "id": "57646754-20ee-452a-ac1a-872c149bf57c",
+      "identifier": "HOM-47",
+      "title": "Review and document codebase.",
+      "description": "deeply review the codebase and update [agents.md](http://agents.md)",
+      "priority": 2,
+      "stateId": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "state": {
+        "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+        "name": "Todo",
+        "type": "unstarted"
+      },
+      "assigneeId": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+      "assignee": {
+        "id": "2a5abf10-5c0a-4655-952f-b078ad0d3e4e",
+        "name": "Sero Ch",
+        "email": "sherifcherfa@gmail.com",
+        "avatarUrl": "https://public.linear.app/2a5abf10-5c0a-4655-952f-b078ad0d3e4e/01c00eea-f024-4f1d-af93-58f49b62c026"
+      },
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-47/review-and-document-codebase",
+      "createdAt": "2026-01-15T15:06:58.816Z",
+      "updatedAt": "2026-01-15T15:06:58.816Z"
+    },
+    {
+      "id": "9b560f64-535f-4401-8a1f-fd0018e524d8",
+      "identifier": "HOM-45",
+      "title": "[LMVLLM] Build MCP server health monitoring and auto-reconnect",
+      "description": "Monitor MCP server connections, auto-reconnect on failure with exponential backoff. Health status in UI, tool availability indicators, graceful degradation when servers unavailable.\n\n<!-- orchestra:{\"projectPath\":\"/projects/vllm-studio\",\"automationEnabled\":true} -->",
+      "priority": 2,
+      "stateId": "f34e80c0-f9ce-4c19-bc3f-8c4f14b0ee73",
+      "state": {
+        "id": "f34e80c0-f9ce-4c19-bc3f-8c4f14b0ee73",
+        "name": "Done",
+        "type": "completed"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-45/lmvllm-build-mcp-server-health-monitoring-and-auto-reconnect",
+      "createdAt": "2025-12-27T21:36:04.774Z",
+      "updatedAt": "2026-01-15T12:59:57.178Z"
+    },
+    {
+      "id": "1288345a-943f-4ed2-a295-ed1ff2be50d5",
+      "identifier": "HOM-46",
+      "title": "00000000000",
+      "description": "Integration test via orchestrator + memory setup\n\n<!-- orchestra:{\"sessionId\":\"ses_4575c5a62ffeUlxUstV13asbf1\"} -->",
+      "priority": 0,
+      "stateId": "1913987b-144e-427e-a89b-072abe8fc04b",
+      "state": {
+        "id": "1913987b-144e-427e-a89b-072abe8fc04b",
+        "name": "Todo",
+        "type": "unstarted"
+      },
+      "assignee": null,
+      "project": null,
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-46/00000000000",
+      "createdAt": "2025-12-28T11:30:47.316Z",
+      "updatedAt": "2026-01-10T16:00:56.567Z"
+    },
+    {
+      "id": "dfb62cd8-a3b6-4209-a8e4-e986f1717f5a",
+      "identifier": "HOM-44",
+      "title": "[LMVLLM] Implement chat session forking with context preservation",
+      "description": "When forking a chat, preserve full context including system prompt, tool calls, and assistant responses. Branch visualization in UI. Merge branches back if needed.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-44/lmvllm-implement-chat-session-forking-with-context-preservation",
+      "createdAt": "2025-12-27T21:36:04.423Z",
+      "updatedAt": "2025-12-27T21:36:04.423Z"
+    },
+    {
+      "id": "72790f1b-24c2-4bae-ad48-feae5dc68d16",
+      "identifier": "HOM-43",
+      "title": "[LMVLLM] Create model download and HuggingFace integration",
+      "description": "Add UI to browse/search HuggingFace models, download directly to models directory. Progress tracking, resume interrupted downloads, checksum verification.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-43/lmvllm-create-model-download-and-huggingface-integration",
+      "createdAt": "2025-12-27T21:36:04.092Z",
+      "updatedAt": "2025-12-27T21:36:04.092Z"
+    },
+    {
+      "id": "2a30ebb3-935d-4215-a29c-8715aabc4040",
+      "identifier": "HOM-42",
+      "title": "[LMVLLM] Add real-time GPU metrics streaming via WebSocket",
+      "description": "Stream GPU utilization, memory, temperature, power draw via WebSocket to frontend. Historical charts, alerts on thermal throttling, memory leaks detection.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-42/lmvllm-add-real-time-gpu-metrics-streaming-via-websocket",
+      "createdAt": "2025-12-27T21:36:03.772Z",
+      "updatedAt": "2025-12-27T21:36:03.772Z"
+    },
+    {
+      "id": "e6e7e078-592c-4667-adbf-fa33c3b6b3a6",
+      "identifier": "HOM-41",
+      "title": "[LMVLLM] Build recipe versioning and rollback system",
+      "description": "Version recipes on changes, maintain history. One-click rollback to previous recipe versions. Diff view between versions. Auto-backup before destructive changes.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-41/lmvllm-build-recipe-versioning-and-rollback-system",
+      "createdAt": "2025-12-27T21:36:03.439Z",
+      "updatedAt": "2025-12-27T21:36:03.439Z"
+    },
+    {
+      "id": "5e1d2b62-1377-4216-be59-574402923a1e",
+      "identifier": "HOM-40",
+      "title": "[LMVLLM] Implement graceful model switching with request draining",
+      "description": "When switching models, drain in-flight requests gracefully with timeout. Queue new requests during switch, replay after new model ready. Zero-downtime model swaps.",
+      "priority": 1,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-40/lmvllm-implement-graceful-model-switching-with-request-draining",
+      "createdAt": "2025-12-27T21:36:03.115Z",
+      "updatedAt": "2025-12-27T21:36:03.115Z"
+    },
+    {
+      "id": "c2ee04dc-790e-4c07-850f-768e434d9cdd",
+      "identifier": "HOM-39",
+      "title": "[LMVLLM] Create model warm-up and benchmark automation",
+      "description": "Auto-run warm-up prompts after model load, benchmark tokens/sec, measure time-to-first-token. Store benchmarks per recipe for comparison. Alert on performance degradation.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-39/lmvllm-create-model-warm-up-and-benchmark-automation",
+      "createdAt": "2025-12-27T21:36:02.803Z",
+      "updatedAt": "2025-12-27T21:36:02.803Z"
+    },
+    {
+      "id": "f6f14de2-a69c-4cf5-a72a-289a92bb0a28",
+      "identifier": "HOM-38",
+      "title": "[LMVLLM] Add multi-GPU load balancing and tensor parallel auto-detection",
+      "description": "Auto-detect available GPUs and suggest optimal tensor_parallel_size. Implement round-robin and least-loaded balancing for multi-model scenarios. GPU affinity pinning.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-38/lmvllm-add-multi-gpu-load-balancing-and-tensor-parallel-auto-detection",
+      "createdAt": "2025-12-27T21:36:02.474Z",
+      "updatedAt": "2025-12-27T21:36:02.474Z"
+    },
+    {
+      "id": "c8269587-5b0f-4436-993f-f85f60fcf0f7",
+      "identifier": "HOM-37",
+      "title": "[LMVLLM] Build recipe validation and compatibility checker",
+      "description": "Validate recipes before launch: check GPU memory requirements vs available VRAM, verify model path exists, validate quantization compatibility. Fail fast with clear error messages.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-37/lmvllm-build-recipe-validation-and-compatibility-checker",
+      "createdAt": "2025-12-27T21:36:02.145Z",
+      "updatedAt": "2025-12-27T21:36:02.145Z"
+    },
+    {
+      "id": "084d8193-4c38-4e0b-8b42-4174620d603d",
+      "identifier": "HOM-36",
+      "title": "[LMVLLM] Implement automatic model eviction with LRU caching",
+      "description": "Add memory-aware LRU cache for loaded models. Auto-evict least recently used models when GPU memory pressure detected. Configurable memory thresholds and eviction policies.",
+      "priority": 1,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+      "project": {
+        "id": "0d3d49a9-7661-4cf9-96c1-9e67f3c4dab8",
+        "name": "lmvllm"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-36/lmvllm-implement-automatic-model-eviction-with-lru-caching",
+      "createdAt": "2025-12-27T21:36:01.825Z",
+      "updatedAt": "2025-12-27T21:36:01.825Z"
+    },
+    {
+      "id": "5413c169-50c7-40d3-a4f9-7a614c9c4a8a",
+      "identifier": "HOM-35",
+      "title": "[Clawdis] Implement AI response caching and deduplication",
+      "description": "Cache common AI responses, detect duplicate/similar questions, serve cached responses with freshness indicators. Reduce AI API costs and latency.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-35/clawdis-implement-ai-response-caching-and-deduplication",
+      "createdAt": "2025-12-27T21:35:34.801Z",
+      "updatedAt": "2025-12-27T21:35:34.801Z"
+    },
+    {
+      "id": "eb45fbf2-2434-4a1b-a6c4-49aad3b422d7",
+      "identifier": "HOM-34",
+      "title": "[Clawdis] Add end-to-end message delivery confirmation",
+      "description": "Track message delivery status through entire pipeline: sent -> gateway -> platform -> delivered -> read. Surface in logs and optionally notify sender.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-34/clawdis-add-end-to-end-message-delivery-confirmation",
+      "createdAt": "2025-12-27T21:35:34.487Z",
+      "updatedAt": "2025-12-27T21:35:34.487Z"
+    },
+    {
+      "id": "961b75c9-5102-4ed1-9a4b-ecc8d3c6238b",
+      "identifier": "HOM-33",
+      "title": "[Clawdis] Create bridge mode for cross-platform messaging",
+      "description": "Bridge messages between WhatsApp and Telegram: forward messages between linked chats, maintain formatting, handle media transcoding between platforms.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-33/clawdis-create-bridge-mode-for-cross-platform-messaging",
+      "createdAt": "2025-12-27T21:35:34.161Z",
+      "updatedAt": "2025-12-27T21:35:34.161Z"
+    },
+    {
+      "id": "39780ccd-c87a-4b8a-af12-51036dc7ef40",
+      "identifier": "HOM-32",
+      "title": "[Clawdis] Build conversation export and backup system",
+      "description": "Add conversation export: JSON, Markdown, PDF formats. Include media attachments, searchable archive. Scheduled automatic backups to configurable location.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-32/clawdis-build-conversation-export-and-backup-system",
+      "createdAt": "2025-12-27T21:35:33.851Z",
+      "updatedAt": "2025-12-27T21:35:33.851Z"
+    },
+    {
+      "id": "e268dafc-b91f-4b93-85d6-f3e206ef5ad5",
+      "identifier": "HOM-31",
+      "title": "[Clawdis] Implement voice wake word customization UI",
+      "description": "Enhance mac app voice settings: add custom wake word training, sensitivity adjustment per word, visual feedback during recognition, error sound on failed recognition.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-31/clawdis-implement-voice-wake-word-customization-ui",
+      "createdAt": "2025-12-27T21:35:33.478Z",
+      "updatedAt": "2025-12-27T21:35:33.478Z"
+    },
+    {
+      "id": "4b1abced-bee4-41a9-b196-c8190f9c0570",
+      "identifier": "HOM-30",
+      "title": "[Clawdis] Add multi-account WhatsApp support",
+      "description": "Support multiple WhatsApp accounts with routing rules. Different accounts for different use cases. Account health monitoring and automatic failover.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-30/clawdis-add-multi-account-whatsapp-support",
+      "createdAt": "2025-12-27T21:35:33.169Z",
+      "updatedAt": "2025-12-27T21:35:33.169Z"
+    },
+    {
+      "id": "6193a74d-13cd-426b-be22-4766420c27e6",
+      "identifier": "HOM-29",
+      "title": "[Clawdis] Create scheduled message and reminder system",
+      "description": "Add ability to schedule messages: clawdis schedule --to X --at '2pm' --message 'reminder'. Store in SQLite, background worker for delivery. Support recurring.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-29/clawdis-create-scheduled-message-and-reminder-system",
+      "createdAt": "2025-12-27T21:35:32.847Z",
+      "updatedAt": "2025-12-27T21:35:32.847Z"
+    },
+    {
+      "id": "d362df7e-2cf3-4114-923f-af938eb90ddd",
+      "identifier": "HOM-28",
+      "title": "[Clawdis] Implement Telegram inline mode and rich formatting",
+      "description": "Add Telegram inline bot mode, support Markdown/HTML formatting in responses, inline keyboards for actions, and callback query handling.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-28/clawdis-implement-telegram-inline-mode-and-rich-formatting",
+      "createdAt": "2025-12-27T21:35:32.527Z",
+      "updatedAt": "2025-12-27T21:35:32.527Z"
+    },
+    {
+      "id": "d43b46a8-a756-445f-a4be-6256ccb009c9",
+      "identifier": "HOM-27",
+      "title": "[Clawdis] Build WhatsApp reaction and reply threading support",
+      "description": "Support WhatsApp reactions (emoji responses), proper reply threading with quoted messages, and read receipts. Maintain thread context in AI responses.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-27/clawdis-build-whatsapp-reaction-and-reply-threading-support",
+      "createdAt": "2025-12-27T21:35:32.201Z",
+      "updatedAt": "2025-12-27T21:35:32.201Z"
+    },
+    {
+      "id": "de59a806-81a0-41e7-8a93-875c0c52e31c",
+      "identifier": "HOM-26",
+      "title": "[Clawdis] Add rate limiting and abuse prevention",
+      "description": "Implement per-sender rate limits, spam detection, blocklist management. Add cooldown periods and graceful degradation under load. Log abuse attempts.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-26/clawdis-add-rate-limiting-and-abuse-prevention",
+      "createdAt": "2025-12-27T21:35:31.867Z",
+      "updatedAt": "2025-12-27T21:35:31.867Z"
+    },
+    {
+      "id": "5b32f58a-fe75-4bd8-bcb4-804bb02a69fc",
+      "identifier": "HOM-25",
+      "title": "[Clawdis] Create health monitoring dashboard endpoint",
+      "description": "Add /health dashboard with WebSocket connection status, message throughput, error rates, queue depth, session counts. Expose Prometheus metrics for grafana.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-25/clawdis-create-health-monitoring-dashboard-endpoint",
+      "createdAt": "2025-12-27T21:35:31.523Z",
+      "updatedAt": "2025-12-27T21:35:31.523Z"
+    },
+    {
+      "id": "3fb26d10-7faf-4919-9512-dca6bf9255ee",
+      "identifier": "HOM-24",
+      "title": "[Clawdis] Implement conversation memory and context windows",
+      "description": "Add per-sender conversation history with configurable context window. Summarize old context, persist across gateway restarts. Add memory search/recall commands.",
+      "priority": 1,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-24/clawdis-implement-conversation-memory-and-context-windows",
+      "createdAt": "2025-12-27T21:35:31.080Z",
+      "updatedAt": "2025-12-27T21:35:31.080Z"
+    },
+    {
+      "id": "f6e5a51b-f520-4b1c-a4d9-e5f56d8ea11c",
+      "identifier": "HOM-23",
+      "title": "[Clawdis] Build unified media transcoding pipeline",
+      "description": "Consolidate media handling: auto-convert formats for each platform, compress images intelligently, handle voice note transcription failures gracefully with retry.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-23/clawdis-build-unified-media-transcoding-pipeline",
+      "createdAt": "2025-12-27T21:35:30.680Z",
+      "updatedAt": "2025-12-27T21:35:30.680Z"
+    },
+    {
+      "id": "b7f0e3e9-4883-4d0e-bc6c-d5213b579e0d",
+      "identifier": "HOM-22",
+      "title": "[Clawdis] Add group chat smart filtering and context awareness",
+      "description": "Improve group chat handling: track conversation threads, implement smarter mention detection, add context from recent messages before responding. Reduce noise in busy groups.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-22/clawdis-add-group-chat-smart-filtering-and-context-awareness",
+      "createdAt": "2025-12-27T21:35:30.330Z",
+      "updatedAt": "2025-12-27T21:35:30.330Z"
+    },
+    {
+      "id": "999d9ed7-42ae-4fc4-a8e8-77480f4c3b2d",
+      "identifier": "HOM-21",
+      "title": "[Clawdis] Implement multi-platform message queue with persistence",
+      "description": "Add SQLite-backed message queue for offline message handling. Queue messages when WhatsApp/Telegram disconnected, replay on reconnect. Add queue inspection CLI commands.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "b4fcef30-7240-4bb1-81ec-265705eca799",
+      "project": {
+        "id": "b4fcef30-7240-4bb1-81ec-265705eca799",
+        "name": "clawdis"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-21/clawdis-implement-multi-platform-message-queue-with-persistence",
+      "createdAt": "2025-12-27T21:35:30.028Z",
+      "updatedAt": "2025-12-27T21:35:30.028Z"
+    },
+    {
+      "id": "7f20073e-c352-4279-8d96-2917fad8bcc9",
+      "identifier": "HOM-20",
+      "title": "[Orchestra] Create hub-and-spoke coordination stress tests",
+      "description": "Test orchestrator coordination with 5+ concurrent workers, task delegation, result aggregation, and failure handling when workers crash.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-20/orchestra-create-hub-and-spoke-coordination-stress-tests",
+      "createdAt": "2025-12-27T21:35:00.405Z",
+      "updatedAt": "2025-12-27T21:35:00.405Z"
+    },
+    {
+      "id": "44d5408c-0dd8-4faa-b033-8e6e61baa150",
+      "identifier": "HOM-19",
+      "title": "[Orchestra] Build SDK workspace component tests",
+      "description": "Test the SDK workspace UI: session management, worker spawning from UI, real-time log streaming, and SQLite preference persistence.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-19/orchestra-build-sdk-workspace-component-tests",
+      "createdAt": "2025-12-27T21:35:00.059Z",
+      "updatedAt": "2025-12-27T21:35:00.059Z"
+    },
+    {
+      "id": "87558ab4-4d0c-4994-af56-f7c2b808d337",
+      "identifier": "HOM-18",
+      "title": "[Orchestra] Add vision worker auto-routing tests",
+      "description": "Test image analysis routing, screenshot interpretation, UI mockup review. Verify vision job logging to jobs.jsonl and result caching.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-18/orchestra-add-vision-worker-auto-routing-tests",
+      "createdAt": "2025-12-27T21:34:59.750Z",
+      "updatedAt": "2025-12-27T21:34:59.750Z"
+    },
+    {
+      "id": "fb5d9b86-1afc-4664-9856-049d5c877895",
+      "identifier": "HOM-17",
+      "title": "[Orchestra] Implement worker specialization benchmarks",
+      "description": "Create benchmark suite comparing specialized workers vs general workers on specific task types. Measure accuracy, speed, and token efficiency per worker type.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-17/orchestra-implement-worker-specialization-benchmarks",
+      "createdAt": "2025-12-27T21:34:59.435Z",
+      "updatedAt": "2025-12-27T21:34:59.435Z"
+    },
+    {
+      "id": "a162f619-6991-4fa0-9def-5899d4362866",
+      "identifier": "HOM-16",
+      "title": "[Orchestra] Create Linear integration automation for task lifecycle",
+      "description": "Build bidirectional sync: auto-create issues from TODOs, update status from worker progress, and close issues on completion. Add label management and priority inference.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-16/orchestra-create-linear-integration-automation-for-task-lifecycle",
+      "createdAt": "2025-12-27T21:34:59.134Z",
+      "updatedAt": "2025-12-27T21:34:59.134Z"
+    },
+    {
+      "id": "bf9f9751-add7-456e-99f3-baefb2fa7937",
+      "identifier": "HOM-15",
+      "title": "[Orchestra] Add Neo4j memory system integration tests",
+      "description": "Test memory persistence, retrieval, and context injection with Neo4j backend. Verify memory pruning, relevance scoring, and cross-session memory sharing.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-15/orchestra-add-neo4j-memory-system-integration-tests",
+      "createdAt": "2025-12-27T21:34:58.804Z",
+      "updatedAt": "2025-12-27T21:34:58.804Z"
+    },
+    {
+      "id": "e7071a1d-debb-4357-af34-69f40dc3f782",
+      "identifier": "HOM-14",
+      "title": "[Orchestra] Implement async job correctness verification",
+      "description": "Enhance async job tests to verify actual output quality, not just completion. Add timeout handling, retry logic testing, and job state persistence validation.",
+      "priority": 3,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-14/orchestra-implement-async-job-correctness-verification",
+      "createdAt": "2025-12-27T21:34:58.451Z",
+      "updatedAt": "2025-12-27T21:34:58.451Z"
+    },
+    {
+      "id": "22c16cf3-1850-4865-881a-2571b5ace7a5",
+      "identifier": "HOM-13",
+      "title": "[Orchestra] Build massive task testing framework with parallel execution",
+      "description": "Create stress tests with complex multi-file refactoring tasks, large codebase analysis, and parallel worker coordination. Measure reliability and throughput under load.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-13/orchestra-build-massive-task-testing-framework-with-parallel-execution",
+      "createdAt": "2025-12-27T21:34:58.136Z",
+      "updatedAt": "2025-12-27T21:34:58.136Z"
+    },
+    {
+      "id": "94afa4ef-c7b9-4629-8097-5961fb9ed6cf",
+      "identifier": "HOM-12",
+      "title": "[Orchestra] Add comprehensive permission testing for all tool restrictions",
+      "description": "Expand from 1 test to full coverage: filesystem read/write, bash restrictions, network permissions, tool whitelisting/blacklisting. Test permission inheritance and override scenarios.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-12/orchestra-add-comprehensive-permission-testing-for-all-tool",
+      "createdAt": "2025-12-27T21:34:57.798Z",
+      "updatedAt": "2025-12-27T21:34:57.798Z"
+    },
+    {
+      "id": "3c5cbd22-0966-4e90-9a22-ce8052fcee36",
+      "identifier": "HOM-11",
+      "title": "[Orchestra] Implement quality evaluation test suite for worker responses",
+      "description": "Add tests that verify worker output correctness beyond simple contains OK checks. Include coding quality evals, architecture review quality, and documentation accuracy scoring. Reference E2E_BENCHMARK_GAPS.md gaps.",
+      "priority": 2,
+      "stateId": "ad97afda-688f-40b8-b16c-c23b165f1469",
+      "state": {
+        "id": "ad97afda-688f-40b8-b16c-c23b165f1469",
+        "name": "Backlog",
+        "type": "backlog"
+      },
+      "assignee": null,
+      "projectId": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+      "project": {
+        "id": "21b10e39-95e9-45eb-9958-55afa98a1b26",
+        "name": "orchestra"
+      },
+      "labelIds": [],
+      "labels": [],
+      "teamId": "98061049-bb17-4897-8172-a451e725f92f",
+      "url": "https://linear.app/homelab0x/issue/HOM-11/orchestra-implement-quality-evaluation-test-suite-for-worker-responses",
+      "createdAt": "2025-12-27T21:34:57.444Z",
+      "updatedAt": "2025-12-27T21:34:57.444Z"
+    }
+  ],
+  "activeTeamId": "98061049-bb17-4897-8172-a451e725f92f",
+  "lastSyncedAt": 1768559548152
+}

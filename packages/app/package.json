@@ -12,11 +12,13 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test:e2e": "playwright test"
   },
   "license": "MIT",
   "devDependencies": {
     "@happy-dom/global-registrator": "20.0.11",
+    "@playwright/test": "1.50.0",
     "@tailwindcss/vite": "catalog:",
     "@tsconfig/bun": "1.0.9",
     "@types/bun": "catalog:",

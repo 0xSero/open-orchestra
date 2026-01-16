@@ -1,6 +1,13 @@
 {
   "workers": [
     {
+      "id": "orchestrator",
+      "name": "Orchestrator",
+      "description": "Delegates all work to workers. Never performs repo edits or executes commands directly. Acts as the primary coordinator.",
+      "runtime": "agent",
+      "model": "anthropic/claude-sonnet-4"
+    },
+    {
       "id": "reader",
       "name": "Repo Reader",
       "description": "Reads codebase and produces structured summaries",

@@ -1,7 +1,7 @@
 import type { createOpencodeClient } from "@opencode-ai/sdk"
 import type { Store } from "./store"
 import type { Runtime } from "./tools"
-import type { WorkflowStep } from "./types"
+import type { WorkflowRunState, WorkflowStep } from "./types"
 
 type Client = ReturnType<typeof createOpencodeClient>
 
@@ -293,14 +293,31 @@ export async function runWorkflow(
   orchestratorSessionId: string,
   store: Store,
   runtime: Runtime,
-  client: Client
+  client: Client,
+  onRuntimeUpdate?: () => void | Promise<void>
 ): Promise<MaestroResult> {
   const startedAt = now()
   const runId = generateId("run")
 
+  const runState: WorkflowRunState = {
+    runId,
+    workflowId,
+    status: "running",
+    startedAt,
+    steps: []
+  }
+
+  runtime.workflowRuns.set(runId, runState)
+  if (onRuntimeUpdate) await onRuntimeUpdate()
+
   // Load workflow
   const workflow = await store.getWorkflow(workflowId)
   if (!workflow) {
+    runState.status = "failed"
+    runState.steps = []
+    runState.completedAt = now()
+    runtime.workflowRuns.set(runId, runState)
+    if (onRuntimeUpdate) await onRuntimeUpdate()
     return {
       runId,
       workflowId,
@@ -336,12 +353,28 @@ export async function runWorkflow(
 
     if (stepResult) {
       steps.push(stepResult)
+      runState.steps.push({
+        step: stepResult.step,
+        name: stepResult.name,
+        status: stepResult.status,
+        workerInstanceId: stepResult.workerInstanceId,
+        verification: stepResult.verification,
+        error: stepResult.error
+      })
+      runtime.workflowRuns.set(runId, runState)
+      if (onRuntimeUpdate) await onRuntimeUpdate()
+
       if (stepResult.status === "failed") {
         failed = true
         break // Stop on first failure
       }
     }
   }
+
+  runState.status = failed ? "failed" : "completed"
+  runState.completedAt = now()
+  runtime.workflowRuns.set(runId, runState)
+  if (onRuntimeUpdate) await onRuntimeUpdate()
 
   return {
     runId,

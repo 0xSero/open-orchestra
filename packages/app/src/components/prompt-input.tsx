@@ -1,5 +1,6 @@
 import { useFilteredList } from "@opencode-ai/ui/hooks"
 import {
+  batch,
   createEffect,
   on,
   Component,
@@ -1272,8 +1273,11 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
       )
     }
 
-    clearInput()
-    addOptimisticMessage()
+    // Batch state updates to prevent intermediate renders that cause floating-ui errors
+    batch(() => {
+      clearInput()
+      addOptimisticMessage()
+    })
 
     client.session
       .prompt({
@@ -1289,8 +1293,10 @@ export const PromptInput: Component<PromptInputProps> = (props) => {
           title: "Failed to send prompt",
           description: errorMessage(err),
         })
-        removeOptimisticMessage()
-        restoreInput()
+        batch(() => {
+          removeOptimisticMessage()
+          restoreInput()
+        })
       })
   }
 

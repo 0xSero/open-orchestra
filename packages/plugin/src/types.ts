@@ -40,8 +40,11 @@ export type Job = {
   orchestratorSessionId: string
   workerInstanceId: string
   workerSessionId?: string
-  status: "running" | "completed" | "failed"
+  workerId: string
+  prompt: string
+  status: "pending" | "running" | "completed" | "failed"
   createdAt: string
+  startedAt?: string
   completedAt?: string
 }
 
@@ -74,6 +77,27 @@ export type WorkflowRun = {
   completedAt?: string
 }
 
+// Workflow run summary persisted for UI/runtime state
+export type WorkflowRunState = {
+  runId: string
+  workflowId: string
+  status: "running" | "completed" | "failed"
+  startedAt: string
+  completedAt?: string
+  steps: Array<{
+    step: number
+    name: string
+    status: "completed" | "failed" | "skipped"
+    workerInstanceId?: string
+    verification?: {
+      type: string
+      passed: boolean
+      message?: string
+    }
+    error?: string
+  }>
+}
+
 // Skill definition (parsed from SKILL.md)
 export type Skill = {
   id: string          // directory name
@@ -81,6 +105,16 @@ export type Skill = {
   description: string // from frontmatter
   path: string        // full path to SKILL.md
   content: string     // full file content
+}
+
+// Memory entry persisted for UI
+export type MemoryEntry = {
+  id: string
+  content: string
+  tags?: string[]
+  source?: string
+  sessionId?: string
+  createdAt: string
 }
 
 // Integration definition - user-defined, stored in integrations.json

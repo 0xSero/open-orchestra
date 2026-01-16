@@ -1,0 +1,37 @@
+{
+  "roots": {
+    "project": "/Users/sero/projects/orchestra/packages/app/.opencode/skill",
+    "global": "/Users/sero/.claude/skills",
+    "config": "/Users/sero/.config/opencode/skill"
+  },
+  "skills": [
+    {
+      "id": "twitter-content-search",
+      "name": "twitter-content-search",
+      "description": "Fast semantic search over your Twitter/X archive using pre-computed embeddings",
+      "path": "/Users/sero/.claude/skills/twitter-content-search/SKILL.md",
+      "location": "global"
+    },
+    {
+      "id": "n8n",
+      "name": "n8n",
+      "description": "Manage n8n workflow automation server on EC2. SSH access, workflow management, report generation, and TPL dashboard analytics. Use when user mentions \"n8n\", \"workflows\", \"reports\", \"tpl report\", or \"dashboard\".",
+      "path": "/Users/sero/.claude/skills/n8n/SKILL.md",
+      "location": "global"
+    },
+    {
+      "id": "thrive-data",
+      "name": "thrive-data",
+      "description": "Extract non-TPL projects from the Thrive database, cross-reference with existing TPL projects using fuzzy matching, and submit unmatched projects via the Thrive Core API. Use this skill when the user mentions \"thrive data\", wants to sync projects to TPL, extract project data, or submit new projects to the Power List.",
+      "path": "/Users/sero/.claude/skills/thrive-data/SKILL.md",
+      "location": "global"
+    },
+    {
+      "id": "twitter-content-search",
+      "name": "twitter-content-search",
+      "description": "Fast semantic search over your Twitter/X archive using pre-computed embeddings",
+      "path": "/Users/sero/.config/opencode/skill/twitter-content-search/SKILL.md",
+      "location": "config"
+    }
+  ]
+}

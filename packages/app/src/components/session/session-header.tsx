@@ -34,7 +34,13 @@ export function SessionHeader() {
 
   const projectDirectory = createMemo(() => base64Decode(params.dir ?? ""))
 
-  const sessions = createMemo(() => (sync.data.session ?? []).filter((s) => !s.parentID))
+  // Check if session is a worker session (created by orchestra plugin)
+  const isWorkerSession = (s: Session) => /\((agent|server)\)$/.test(s.title ?? "")
+  const sessions = createMemo(() =>
+    (sync.data.session ?? []).filter((s) => !s.parentID)
+  )
+  // Group sessions: user sessions first, then agent sessions
+  const sessionGroup = (s: Session) => isWorkerSession(s) ? "Agents" : ""
   const currentSession = createMemo(() => sync.data.session.find((s) => s.id === params.id))
   const parentSession = createMemo(() => {
     const current = currentSession()
@@ -98,6 +104,7 @@ export function SessionHeader() {
                     placeholder="New session"
                     label={(x) => x.title}
                     value={(x) => x.id}
+                    groupBy={sessionGroup}
                     onSelect={navigateToSession}
                     class="text-14-regular text-text-base max-w-[calc(100vw-180px)] md:max-w-md"
                     variant="ghost"
@@ -112,6 +119,7 @@ export function SessionHeader() {
                   placeholder="Back to parent session"
                   label={(x) => x.title}
                   value={(x) => x.id}
+                  groupBy={sessionGroup}
                   onSelect={(session) => {
                     // Only navigate if selecting a different session than current parent
                     const currentParent = parentSession()

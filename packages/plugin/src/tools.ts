@@ -1,9 +1,13 @@
-import { tool, type ToolDefinition } from "@opencode-ai/plugin"
+import type { ToolDefinition } from "@opencode-ai/plugin"
 import type { createOpencodeClient } from "@opencode-ai/sdk"
-import type { Store } from "./store"
-import type { WorkerInstance, Job, Worker } from "./types"
+import { tool } from "@opencode-ai/plugin"
 import type { IntegrationManager } from "./integrations"
+import type { IntegrationInstance, Job, MemoryEntry, Worker, WorkerInstance, WorkflowRunState } from "./types"
+import type { Store } from "./store"
+import { deleteSkills, installSkills, listSkills, writeSkillsState, type SkillDeleteInput, type SkillInstallInput } from "./skills"
 import { runWorkflow } from "./maestro"
+import { createLinearTools } from "./linear-tools"
+import { dirname } from "node:path"
 
 type Client = ReturnType<typeof createOpencodeClient>
 type Tools = Record<string, ToolDefinition>
@@ -12,13 +16,84 @@ type Tools = Record<string, ToolDefinition>
 export type Runtime = {
   instances: Map<string, WorkerInstance>
   jobs: Map<string, Job>
+  workflowRuns: Map<string, WorkflowRunState>
+  memoryEntries: Map<string, MemoryEntry>
+}
+
+export type IntegrationInstanceState = {
+  integrationId: string
+  status: IntegrationInstance["status"]
+  pid?: number
+  port?: number
+  url?: string
+  startedAt: string
+  error?: string
+}
+
+export type RuntimeState = {
+  timestamp: string
+  instances: Array<{ id: string } & WorkerInstance>
+  jobs: Array<{
+    id: string
+    jobId: string
+    status: Job["status"]
+    workerId: string
+    workerSessionId?: string
+    workerInstanceId: string
+    createdAt: string
+    completedAt?: string
+  }>
+  workflowRuns: WorkflowRunState[]
+  memoryEntries: MemoryEntry[]
+  integrationInstances: IntegrationInstanceState[]
 }
 
 export function createRuntime(): Runtime {
   return {
     instances: new Map(),
-    jobs: new Map()
+    jobs: new Map(),
+    workflowRuns: new Map(),
+    memoryEntries: new Map()
   }
+}
+
+export function buildRuntimeState(
+  runtime: Runtime,
+  integrations: IntegrationManager,
+  timestamp: string = new Date().toISOString()
+): RuntimeState {
+  return {
+    timestamp,
+    instances: Array.from(runtime.instances.entries()).map(([id, inst]) => ({
+      id,
+      ...inst
+    })),
+    jobs: Array.from(runtime.jobs.entries()).map(([id, job]) => ({
+      id,
+      jobId: job.jobId,
+      status: job.status,
+      workerId: job.workerId,
+      workerSessionId: job.workerSessionId,
+      workerInstanceId: job.workerInstanceId,
+      createdAt: job.createdAt,
+      completedAt: job.completedAt,
+    })),
+    workflowRuns: Array.from(runtime.workflowRuns.values()),
+    memoryEntries: Array.from(runtime.memoryEntries.values()),
+    integrationInstances: Array.from(integrations.instances.values()).map((instance) => ({
+      integrationId: instance.integrationId,
+      status: instance.status,
+      pid: typeof instance.process?.pid === "number" ? instance.process.pid : undefined,
+      port: instance.port,
+      url: instance.port ? `http://localhost:${instance.port}` : undefined,
+      startedAt: instance.startedAt,
+      error: instance.error,
+    })),
+  }
+}
+
+export function sortMemoryEntries(entries: MemoryEntry[]): MemoryEntry[] {
+  return [...entries].sort((a, b) => a.createdAt.localeCompare(b.createdAt))
 }
 
 // Utility: generate ID
@@ -31,6 +106,10 @@ function now(): string {
   return new Date().toISOString()
 }
 
+function getProjectDirectory(store: Store): string {
+  return dirname(dirname(store.baseDir))
+}
+
 // Get or spawn a worker instance
 async function getOrSpawnWorker(
   workerId: string,
@@ -38,7 +117,8 @@ async function getOrSpawnWorker(
   runtime: Runtime,
   integrations: IntegrationManager,
   client: Client,
-  orchestratorSessionId: string
+  orchestratorSessionId: string,
+  onRuntimeUpdate?: () => void | Promise<void>
 ): Promise<{ instance: WorkerInstance; sessionId: string; instructions?: string } | { error: string }> {
   const worker = await store.getWorker(workerId)
   if (!worker) {
@@ -98,10 +178,23 @@ async function getOrSpawnWorker(
   }
 
   runtime.instances.set(instanceId, instance)
+  if (onRuntimeUpdate) onRuntimeUpdate()
   return { instance, sessionId: session.data.id, instructions }
 }
 
-export function createTools(store: Store, runtime: Runtime, integrations: IntegrationManager, client: Client): Tools {
+export function createTools(
+  store: Store,
+  runtime: Runtime,
+  integrations: IntegrationManager,
+  client: Client,
+  onRuntimeUpdate?: () => void | Promise<void>
+): Tools {
+  // Helper to notify when runtime changes
+  const notifyUpdate = () => {
+    if (onRuntimeUpdate) {
+      onRuntimeUpdate()
+    }
+  }
   return {
     // List worker templates and active instances
     workers: tool({
@@ -142,13 +235,13 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
       }
     }),
 
-    // Delegate work to a worker (for agent/server runtimes only)
+    // Delegate work to a worker (agent/server/subagent runtimes)
     delegate: tool({
-      description: "Spawn SERVICE agents (docs, memory) that stay alive. NEVER use for reader/coder/reviewer - those are subagents that MUST use the native Task tool. Only for runtime:agent or runtime:server workers.",
+      description: "Delegate a task to a worker. Service agents (docs, memory) stay alive; subagents (reader, coder, reviewer) run as ephemeral task workers. Prefer Task for subagents unless you need this tool for consistency.",
       args: {
-        to: tool.schema.string().describe("Service worker ID like 'docs' or 'memory' (NOT 'reader', 'coder', 'reviewer' - those MUST use Task tool)"),
+        to: tool.schema.string().describe("Worker ID like 'docs', 'memory', 'reader', 'coder', or 'reviewer'"),
         task: tool.schema.string().describe("The task to delegate"),
-        async: tool.schema.boolean().optional().describe("Run asynchronously (default: false). Always use async:true for service agents.")
+        async: tool.schema.boolean().optional().describe("Run asynchronously (default: false). Use async:true for service agents when you don't need a sync reply.")
       },
       async execute(args, ctx) {
         // CRITICAL: Only orchestrator should use delegate
@@ -171,16 +264,11 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
           return JSON.stringify({ error: `Worker not found: ${args.to}` })
         }
 
-        // Reject subagent runtime - should use native Task tool
-        if (worker.runtime === "subagent") {
-          return JSON.stringify({
-            error: `Worker "${args.to}" has runtime:subagent. Use the native Task tool instead: Task(subagent_type: "${args.to}", prompt: "...")`,
-            hint: "The delegate tool is only for agent and server runtime workers."
-          })
-        }
+        // Subagents are allowed here to support consistent delegation flows
+        // (They will be spawned with parentID = orchestratorSessionId)
 
         // Get or spawn worker
-        const result = await getOrSpawnWorker(args.to, store, runtime, integrations, client, ctx.sessionID)
+        const result = await getOrSpawnWorker(args.to, store, runtime, integrations, client, ctx.sessionID, notifyUpdate)
 
         if ("error" in result) {
           return JSON.stringify({ error: result.error })
@@ -195,6 +283,7 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
 
         instance.status = "busy"
         instance.lastSeenAt = now()
+        notifyUpdate()
 
         // Async mode: fire and track
         if (args.async) {
@@ -204,10 +293,13 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
             orchestratorSessionId: ctx.sessionID,
             workerInstanceId: instance.instanceId,
             workerSessionId: sessionId,
+            workerId: args.to,
             status: "running",
+            prompt: args.task,
             createdAt: now()
           }
           runtime.jobs.set(jobId, job)
+          notifyUpdate()
 
           // Fire without waiting
           client.session.prompt({
@@ -248,6 +340,7 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
 
           instance.status = "available"
           instance.lastSeenAt = now()
+          notifyUpdate()
 
           // Extract text from response
           const parts = response.data?.parts ?? []
@@ -264,6 +357,7 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
         } catch (err: any) {
           instance.status = "available"
           instance.lastSeenAt = now()
+          notifyUpdate()
           return JSON.stringify({ error: err?.message ?? String(err) })
         }
       }
@@ -341,6 +435,7 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
         // Mark as busy while querying
         serviceInstance.status = "busy"
         serviceInstance.lastSeenAt = now()
+        notifyUpdate()
 
         try {
           const response = await client.session.prompt({
@@ -356,6 +451,7 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
 
           serviceInstance.status = "available"
           serviceInstance.lastSeenAt = now()
+          notifyUpdate()
 
           // Extract text from response
           const parts = response.data?.parts ?? []
@@ -371,6 +467,7 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
         } catch (err: any) {
           serviceInstance.status = "available"
           serviceInstance.lastSeenAt = now()
+          notifyUpdate()
           return JSON.stringify({ error: err?.message ?? String(err) })
         }
       }
@@ -388,10 +485,81 @@ export function createTools(store: Store, runtime: Runtime, integrations: Integr
           ctx.sessionID,
           store,
           runtime,
-          client
+          client,
+          notifyUpdate
         )
         return JSON.stringify(result, null, 2)
       }
-    })
+    }),
+
+    memory_record: tool({
+      description: "Record a memory entry for UI visibility and future recall.",
+      args: {
+        id: tool.schema.string().optional().describe("Optional memory entry ID for updates"),
+        content: tool.schema.string().describe("Memory content to store"),
+        tags: tool.schema.array(tool.schema.string()).optional().describe("Tags for categorization"),
+        source: tool.schema.string().optional().describe("Source label (worker, workflow, etc.)"),
+        sessionId: tool.schema.string().optional().describe("Session ID related to this memory")
+      },
+      async execute(args) {
+        const existing = args.id ? runtime.memoryEntries.get(args.id) : undefined
+        const entry: MemoryEntry = {
+          id: args.id ?? generateId("mem"),
+          content: args.content,
+          tags: args.tags,
+          source: args.source,
+          sessionId: args.sessionId,
+          createdAt: existing?.createdAt ?? now()
+        }
+        runtime.memoryEntries.set(entry.id, entry)
+        notifyUpdate()
+        return JSON.stringify(entry, null, 2)
+      }
+    }),
+
+    skill_list: tool({
+      description: "List installed skills across project and global skill directories.",
+      args: {},
+      async execute() {
+        const projectDir = getProjectDirectory(store)
+        const result = await listSkills(projectDir)
+        await writeSkillsState(projectDir, result)
+        return JSON.stringify(result, null, 2)
+      }
+    }),
+
+    skill_install: tool({
+      description: "Install skills from a git source into the global or project skill directory.",
+      args: {
+        source: tool.schema.string().describe("Source repo: 'anthropics/skills' or 'git:<url>'"),
+        skills: tool.schema.array(tool.schema.string()).describe("Skill names to install"),
+        location: tool.schema.string().optional().describe("Install target: 'global' or 'project' (default: global)")
+      },
+      async execute(args) {
+        const projectDir = getProjectDirectory(store)
+        const result = await installSkills(projectDir, store.baseDir, args as SkillInstallInput)
+        const state = await listSkills(projectDir)
+        await writeSkillsState(projectDir, state)
+        return JSON.stringify({ ...result, state }, null, 2)
+      }
+    }),
+
+    skill_delete: tool({
+      description: "Delete installed skills from the global or project skill directory.",
+      args: {
+        skills: tool.schema.array(tool.schema.string()).describe("Skill names to delete"),
+        location: tool.schema.string().optional().describe("Delete target: 'global' or 'project' (default: global)")
+      },
+      async execute(args) {
+        const projectDir = getProjectDirectory(store)
+        const result = await deleteSkills(projectDir, args as SkillDeleteInput)
+        const state = await listSkills(projectDir)
+        await writeSkillsState(projectDir, state)
+        return JSON.stringify({ ...result, state }, null, 2)
+      }
+    }),
+
+    // Linear integration tools
+    ...createLinearTools(() => getProjectDirectory(store), notifyUpdate)
   }
 }

@@ -1,13 +1,12 @@
 use std::{
-    net::{SocketAddr, TcpListener},
+    net::SocketAddr,
     process::Command,
     sync::{Arc, Mutex},
     time::{Duration, Instant},
 };
 use tauri::{
-    AppHandle, LogicalSize, Manager, Monitor, RunEvent, TitleBarStyle, WebviewUrl, WebviewWindow,
+    AppHandle, LogicalSize, Manager, RunEvent, TitleBarStyle, WebviewUrl, WebviewWindow,
 };
-use tauri_plugin_dialog::{DialogExt, MessageDialogButtons, MessageDialogResult};
 use tauri_plugin_shell::process::{CommandChild, CommandEvent};
 use tauri_plugin_shell::ShellExt;
 use tokio::net::TcpSocket;
@@ -20,15 +19,10 @@ fn get_sidecar_port() -> u16 {
         .map(|s| s.to_string())
         .or_else(|| std::env::var("OPENCODE_PORT").ok())
         .and_then(|port_str| port_str.parse().ok())
-        .unwrap_or_else(|| {
-            TcpListener::bind("127.0.0.1:0")
-                .expect("Failed to bind to find free port")
-                .local_addr()
-                .expect("Failed to get local address")
-                .port()
-        })
+        .unwrap_or(4096) // Default to standard port instead of random
 }
 
+#[allow(dead_code)]
 fn find_and_kill_process_on_port(port: u16) -> Result<(), Box<dyn std::error::Error>> {
     // Find all listeners on the specified port
     let listeners = listeners::get_processes_by_port(port)?;
